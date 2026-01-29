@@ -1,11 +1,10 @@
 import CoursesSection from "./components/CoursesSection"
+import GoogleReviews from "./components/GoogleReviews"
 import Hero from "./components/Hero"
 import WhatsAppBanner from "./components/whatsAppbanner"
 import WhyChooseUs from "./components/WhyChooseUs"
 
-
 function App() {
-
 
   return (
     <>
@@ -13,6 +12,7 @@ function App() {
       <CoursesSection />
       <WhatsAppBanner/>
       <WhyChooseUs/>
+      <GoogleReviews/>
     </>
   )
 }
