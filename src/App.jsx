@@ -1,4 +1,5 @@
 import CoursesSection from "./components/CoursesSection"
+import Footer from "./components/Footer"
 import GoogleReviews from "./components/GoogleReviews"
 import Hero from "./components/Hero"
 import WhatsAppBanner from "./components/whatsAppbanner"
@@ -13,6 +14,7 @@ function App() {
       <WhatsAppBanner/>
       <WhyChooseUs/>
       <GoogleReviews/>
+      <Footer/>
     </>
   )
 }

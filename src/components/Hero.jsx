@@ -205,7 +205,7 @@ const Hero = () => {
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade" 
                     // Coloquei um link genérico do Maps para o Méier, substitua pelo link de "incorporar" da sua loja real
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3675.356219020234!2d-43.2842!3d-22.9008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997d767568583d%3A0x6295555555555555!2sM%C3%A9ier%2C%20Rio%20de%20Janeiro%20-%20RJ!5e0!3m2!1spt-BR!2sbr!4v1600000000000!5m2!1spt-BR!2sbr" 
+                    src="" 
                     style={{ border: 0 }} 
                     title="Localização Auto Escola Méier" 
                   />
