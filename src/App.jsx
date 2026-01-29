@@ -1,6 +1,7 @@
 import CoursesSection from "./components/CoursesSection"
 import Hero from "./components/Hero"
 import WhatsAppBanner from "./components/whatsAppbanner"
+import WhyChooseUs from "./components/WhyChooseUs"
 
 
 function App() {
@@ -11,8 +12,10 @@ function App() {
       <Hero />
       <CoursesSection />
       <WhatsAppBanner/>
+      <WhyChooseUs/>
     </>
   )
 }
 
 export default App
+
