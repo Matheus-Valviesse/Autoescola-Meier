@@ -153,6 +153,13 @@ const PlanosSection = () => {
     return parcela.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
+  const handlePlanClick = (planName) => {
+    const categoryLabel = categories.find(c => c.id === activeTab)?.label;
+    const message = `Olá! Vim pelo site. Gostaria de saber mais sobre o plano *${planName}* de *${categoryLabel}*.`;
+    const link = `https://wa.me/5521971388736?text=${encodeURIComponent(message)}`;
+    window.open(link, '_blank');
+  };
+
   return (
     <section className="w-full py-20 px-4 md:px-10 lg:px-40 bg-[#f8f5f5] text-[#181111]" id="planos">
       <div className="max-w-[1200px] mx-auto flex flex-col gap-12">
@@ -245,7 +252,9 @@ const PlanosSection = () => {
                   </ul>
                 </div>
 
-                <button className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                <button 
+                  onClick={() => handlePlanClick(plan.name)}
+                  className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
                   plan.highlight
                     ? 'bg-[#f20d0d] text-white hover:bg-red-700 shadow-lg shadow-[#f20d0d]/25 hover:shadow-xl hover:scale-[1.02]'
                     : 'bg-[#181111] text-white hover:bg-gray-900 hover:scale-[1.02]'

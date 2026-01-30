@@ -28,9 +28,9 @@ const Footer = () => {
             
             {/* Ícones Sociais */}
             <div className="flex gap-3 mt-2">
-              <SocialIcon icon={<Instagram size={20} />} />
-              <SocialIcon icon={<Facebook size={20} />} />
-              <SocialIcon icon={<Music size={20} />} />
+              <SocialIcon icon={<Instagram size={20} />} href={'https://www.instagram.com/cfcmeier/'} />
+              <SocialIcon icon={<Facebook size={20} />} href={'https://www.facebook.com/AUTOESCOLAMEIER/'}/>
+             
             </div>
           </div>
 
@@ -41,9 +41,9 @@ const Footer = () => {
               <ContactItem 
                 icon={<MapPin size={20} />} 
                 label="Endereço" 
-                text={<>Rua Dias da Cruz, 123<br/>Méier, Rio de Janeiro - RJ</>} 
+                text={<>Rua Silva Rabêlo, 10 sobreloja 203<br/>Méier, Rio de Janeiro - RJ</>} 
               />
-              <ContactItem 
+              <ContactItem  
                 icon={<Phone size={20} />} 
                 label="Telefone" 
                 text="(21) 2590-1234" 
@@ -60,8 +60,8 @@ const Footer = () => {
           <div className="flex flex-col gap-6">
             <h3 className="text-lg font-bold text-white border-b border-[#543b3b] pb-2 inline-block w-full">Horário</h3>
             <div className="flex flex-col gap-4">
-              <ScheduleItem day="Segunda a Sexta" time="08:00 - 20:00" />
-              <ScheduleItem day="Sábado" time="08:00 - 14:00" />
+              <ScheduleItem day="Segunda a Sexta" time="08:00 - 18:00" />
+              <ScheduleItem day="Sábado" time="08:00 - 12:00" />
               <ScheduleItem day="Domingo" time="Fechado" isClosed />
             </div>
             
@@ -94,20 +94,11 @@ const Footer = () => {
         </div>
 
         {/* Rodapé Final */}
-        <div className="mt-16 pt-8 border-t border-[#2a1d1d] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="mt-16 pt-8 border-t border-[#2a1d1d] flex flex-col md:flex-row items-center justify-center gap-6">
           <p className="text-[#ba9c9c] text-sm text-center md:text-left">
-            © 2024 Auto Escola Méier. Todos os direitos reservados.
+            © 2026 Auto Escola Méier. Todos os direitos reservados.
           </p>
-          <div className="flex flex-wrap justify-center gap-6">
-            <a href="#" className="text-[#ba9c9c] hover:text-[#f20d0d] text-sm transition-colors relative group">
-              Política de Privacidade
-              <span className="absolute left-0 -bottom-1 w-0 h-px bg-[#f20d0d] transition-all group-hover:w-full"></span>
-            </a>
-            <a href="#" className="text-[#ba9c9c] hover:text-[#f20d0d] text-sm transition-colors relative group">
-              Termos de Uso
-              <span className="absolute left-0 -bottom-1 w-0 h-px bg-[#f20d0d] transition-all group-hover:w-full"></span>
-            </a>
-          </div>
+        
         </div>
       </div>
     </footer>
@@ -115,8 +106,9 @@ const Footer = () => {
 };
 
 // Subcomponentes para limpeza visual
-const SocialIcon = ({ icon }) => (
-  <a href="#" className="w-10 h-10 rounded-full bg-[#2a1d1d] hover:bg-[#f20d0d] text-[#ba9c9c] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:scale-105">
+const SocialIcon = ({ icon,href }) => (
+  <a href={href} 
+    target="_blank" className="w-10 h-10 rounded-full bg-[#2a1d1d] hover:bg-[#f20d0d] text-[#ba9c9c] hover:text-white flex items-center justify-center transition-all duration-300 transform hover:scale-105">
     {icon}
   </a>
 );

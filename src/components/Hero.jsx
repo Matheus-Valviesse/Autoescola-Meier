@@ -91,12 +91,12 @@ const Hero = () => {
                   </div>
                 </motion.div>
 
-                <motion.div variants={fadeInUp} className="pt-2">
+                {/* <motion.div variants={fadeInUp} className="pt-2">
                   <button className="group relative flex items-center justify-center gap-3 overflow-hidden rounded-full bg-[#f20d0d] px-8 py-4 transition-all hover:bg-[#f20d0d]/90 hover:scale-[1.02] active:scale-[0.98]">
                     <span className="text-white text-base font-bold leading-normal tracking-wide">Conheça Nossa Frota</span>
                     <ArrowRight className="text-white transition-transform group-hover:translate-x-1" size={20} />
                   </button>
-                </motion.div>
+                </motion.div> */}
               </motion.div>
 
               {/* Coluna Direita: Imagem */}
@@ -168,9 +168,9 @@ const Hero = () => {
                       <div>
                         <h3 className="mb-2 text-xl font-bold text-[#181111]">Unidade Principal</h3>
                         <p className="text-base leading-relaxed text-[#181111]/70">
-                          Rua Dias da Cruz, 188 - Loja B<br/>
+                          Rua Silva Rabêlo, 10 sobreloja 203<br/>
                           Méier, Rio de Janeiro - RJ<br/>
-                          CEP: 20720-012
+                          CEP: 20735-080
                         </p>
                       </div>
                     </div>
@@ -182,16 +182,22 @@ const Hero = () => {
                       <div>
                         <h3 className="mb-2 text-xl font-bold text-[#181111]">Horário de Funcionamento</h3>
                         <p className="text-base leading-relaxed text-[#181111]/70">
-                          Segunda a Sexta: 08:00 às 19:00<br/>
-                          Sábado: 08:00 às 13:00
+                          Segunda a Sexta: 08:00 às 18:00<br/>
+                          Sábado: 08:00 às 12:00
                         </p>
                       </div>
                     </div>
                   </div>
 
                   <div className="mt-10">
-                    <a className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#181111] px-8 py-4 text-base font-bold text-white transition-all hover:bg-[#181111]/90 hover:shadow-lg active:scale-95 sm:w-auto" href="#">
+                    <a 
+                      href="https://www.google.com/maps/search/?api=1&query=Auto+Escola+Méier+Rio+de+Janeiro" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#181111] px-8 py-4 text-base font-bold text-white transition-all hover:bg-[#181111]/90 hover:shadow-lg active:scale-95 sm:w-auto"
+                    >
                       <span>Traçar Rota no Maps</span>
+                      {/* Certifique-se de importar o ícone Navigation do lucide-react */}
                       <Navigation className="transition-transform group-hover:translate-x-1" size={20} />
                     </a>
                   </div>

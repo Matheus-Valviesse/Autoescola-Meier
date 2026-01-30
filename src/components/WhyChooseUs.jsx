@@ -44,15 +44,18 @@ const WhyChooseUs = () => {
             </p>
           </motion.div>
 
-          <motion.button 
+          <motion.a 
+            href="https://wa.me/5521971388736" // Seu link do WhatsApp
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-2 text-[#f20d0d] font-bold text-lg hover:underline decoration-2 underline-offset-4 group"
+            className="flex items-center gap-2 text-[#f20d0d] font-bold text-lg hover:underline decoration-2 underline-offset-4 group cursor-pointer"
           >
             Falar com consultor
             <MessageCircle className="transition-transform group-hover:translate-x-1" size={20} />
-          </motion.button>
+          </motion.a>
         </div>
 
         {/* Grid de Cards */}

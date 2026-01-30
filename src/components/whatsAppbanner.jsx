@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MessageCircle } from 'lucide-react'; // Ícone genérico de mensagem
+import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppBanner = () => {
   return (
@@ -25,7 +25,7 @@ const WhatsAppBanner = () => {
         {/* Botão de Ação */}
         <div className="relative z-10 flex flex-col gap-4 min-w-[200px]">
           <motion.a 
-            href="https://wa.me/5521999999999" // Substitua pelo seu número
+            href="https://wa.me/5521971388736" // Substitua pelo seu número
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}
@@ -36,9 +36,9 @@ const WhatsAppBanner = () => {
             transition={{ 
               boxShadow: { duration: 2, repeat: Infinity } 
             }}
-            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#f20d0d] px-8 py-4 text-base font-bold text-white transition-all hover:bg-white hover:text-[#f20d0d] shadow-lg shadow-[#f20d0d]/20"
+            className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-full bg-[#26d466] px-8 py-4 text-base font-bold text-white transition-all hover:bg-white hover:text-[#26d466] shadow-lg shadow-[#f20d0d]/20"
           >
-            <MessageCircle size={24} />
+            <span className='text-[30px]'><FaWhatsapp /></span>
             <span>Falar no WhatsApp</span>
           </motion.a>
         </div>
