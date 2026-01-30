@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Car, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Header = () => {
@@ -34,8 +34,12 @@ const Header = () => {
             className="flex items-center gap-3 cursor-pointer group" 
             onClick={() => scrollToSection('inicio')}
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f20d0d] text-white shadow-lg shadow-[#f20d0d]/20 group-hover:scale-110 transition-transform duration-300">
-              <Car size={20} />
+            <div className="flex h-14 w-14 items-center justify-center rounded-full  text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <img 
+                 src="/logo-do-site.svg" 
+                 alt="Logo Auto Escola" 
+                 className="w-full h-full " // Ajuste o object-cover conforme a necessidade da sua logo
+               />
             </div>
             <h2 className="text-xl font-bold tracking-tight text-[#181111] dark:text-white group-hover:text-[#f20d0d] transition-colors">
               Auto Escola Méier

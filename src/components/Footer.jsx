@@ -14,8 +14,12 @@ const Footer = () => {
           {/* --- Coluna 1: Marca --- */}
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-3 select-none">
-              <div className="w-12 h-12 rounded-xl bg-[#f20d0d] flex items-center justify-center text-white shadow-lg shadow-[#f20d0d]/20">
-                <Car size={28} />
+              <div className="w-16 h-16 rounded-xl flex items-center justify-center text-white shadow-lg ">
+                <img 
+                 src="/logo-do-site.svg" 
+                 alt="Logo Auto Escola" 
+                 className="w-full h-full " // Ajuste o object-cover conforme a necessidade da sua logo
+               />
               </div>
               <div className="flex flex-col">
                 <h2 className="text-xl font-bold tracking-tight text-white leading-none">Auto Escola</h2>
