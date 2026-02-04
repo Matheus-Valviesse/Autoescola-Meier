@@ -27,7 +27,7 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-[#ba9c9c] text-sm leading-relaxed">
-              Desde 1995 formando condutores com excelência e segurança. A melhor estrutura do Méier para você conquistar sua CNH.
+              Desde 1989 formando condutores com excelência e segurança. A melhor estrutura do Méier para você conquistar sua CNH.
             </p>
             
             {/* Ícones Sociais */}
@@ -50,12 +50,12 @@ const Footer = () => {
               <ContactItem  
                 icon={<Phone size={20} />} 
                 label="Telefone" 
-                text="(21) 2590-1234" 
+                text="(21) 2593-8398 /  (21) 97138-8736" 
               />
               <ContactItem 
                 icon={<Mail size={20} />} 
                 label="E-mail" 
-                text="contato@autoescolameier.com.br" 
+                text="autoescolameier@gmail..com" 
               />
             </ul>
           </div>

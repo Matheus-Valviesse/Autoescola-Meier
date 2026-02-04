@@ -68,7 +68,7 @@ const Hero = () => {
 
                 <motion.div variants={fadeInUp} className="flex flex-col gap-4 text-base text-[#181111]/70 leading-relaxed">
                   <p>
-                    Com mais de 20 anos de estrada, a Auto Escola Méier é sinônimo de segurança e eficiência. Nossa metodologia foca não apenas na aprovação, mas na formação de condutores conscientes e preparados para o trânsito real do Rio de Janeiro.
+                    Com mais de 37 anos de estrada, a Auto Escola Méier é sinônimo de segurança e eficiência. Nossa metodologia foca não apenas na aprovação, mas na formação de condutores conscientes e preparados para o trânsito real do Rio de Janeiro.
                   </p>
                   <p>
                     Contamos com uma frota moderna, ar-condicionado em todos os veículos e instrutores pacientes dedicados ao seu sucesso. Aqui, você não é apenas mais um aluno, você é o próximo motorista habilitado da família.
@@ -82,12 +82,12 @@ const Hero = () => {
                     <p className="text-sm font-medium text-[#181111]/60">Habilitados</p>
                   </div>
                   <div className="flex flex-col gap-1 border-l border-[#e6dbdb] pl-4">
-                    <p className="text-[#f20d0d] text-3xl font-black leading-tight">20+</p>
+                    <p className="text-[#f20d0d] text-3xl font-black leading-tight">37+</p>
                     <p className="text-sm font-medium text-[#181111]/60">Anos de História</p>
                   </div>
                   <div className="flex flex-col gap-1 border-l border-[#e6dbdb] pl-4">
-                    <p className="text-[#f20d0d] text-3xl font-black leading-tight">98%</p>
-                    <p className="text-sm font-medium text-[#181111]/60">Aprovação</p>
+                    <p className="text-[#f20d0d] text-3xl font-black leading-tight">78%</p>
+                    <p className="text-sm font-medium text-[#181111]/60">Melhor indice de aprovação da região</p>
                   </div>
                 </motion.div>
 
