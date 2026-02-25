@@ -210,7 +210,8 @@ const Hero = () => {
                     className="absolute inset-0 h-full w-full grayscale-[10%]" 
                     loading="lazy" 
                     referrerPolicy="no-referrer-when-downgrade" 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1837.680059966096!2d-43.281287511146886!3d-22.900084424003136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997dba8d0f8907%3A0xadeb4739270baada!2sAuto%20Escola%20M%C3%A9ier!5e0!3m2!1spt-PT!2sbr!4v1769709927421!5m2!1spt-PT!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" referrerpolicy="no-referrer-when-downgrade" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1837.680059966096!2d-43.281287511146886!3d-22.900084424003136!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997dba8d0f8907%3A0xadeb4739270baada!2sAuto%20Escola%20M%C3%A9ier!5e0!3m2!1spt-PT!2sbr!4v1769709927421!5m2!1spt-PT!2sbr" width="600" height="450"  
+                    style={{ border: 0 }} 
                     title="Localização Auto Escola Méier" 
                   />
                 </div>
