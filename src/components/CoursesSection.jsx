@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Car, Bike, ShieldCheck, CheckCircle2, Star, MousePointerClick } from 'lucide-react';
+import { Car, Bike, ShieldCheck, CheckCircle2, Star, MousePointerClick, Loader2 } from 'lucide-react';
+import { GiRibbonMedal } from "react-icons/gi";
 
 const categories = [
   { id: 'cat-b', label: '1ª Habilitação Carro (B)', icon: Car },
@@ -10,147 +11,93 @@ const categories = [
   { id: 'add-a', label: 'Adição de Moto', icon: Bike },
 ];
 
-// DADOS ESTRITAMENTE BASEADOS NOS PDFS ENVIADOS
-const plansData = {
-  'cat-b': [ // Fonte: PRIMEIRA HABILITAÇÃO DE CARRO – CAT. B.pdf
-    {
-      name: "Básico",
-      priceCash: "300,00",
-      priceInstallment: "400,00",
-      installments: 2,
-      features: ["2 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    },
-    {
-      name: "Intermediário",
-      priceCash: "650,00",
-      priceInstallment: "800,00",
-      installments: 4,
-      features: ["5 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: true
-    },
-    {
-      name: "Complementar",
-      priceCash: "1.300,00",
-      priceInstallment: "1.500,00",
-      installments: 10,
-      features: ["10 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
+const processarDadosDaPlanilha = (dadosPlanilha) => {
+  const novoFormato = {};
+  dadosPlanilha.forEach(item => {
+    if (!novoFormato[item.id_categoria]) novoFormato[item.id_categoria] = [];
+    novoFormato[item.id_categoria].push({
+      name: item.nome_plano,
+      priceCash: item.preco_a_vista,
+      priceInstallment: item.preco_parcelado,
+      installments: item.qtd_parcelas, 
+      highlight: String(item.destaque).toLowerCase() === 'true',
+      features: item.beneficios ? item.beneficios.split(' | ') : []
+    });
+  });
+  return novoFormato;
+};
+
+const parseValue = (val) => {
+  if (typeof val === 'number') return val;
+  if (typeof val === 'string') {
+    if (val.includes(',')) {
+      return parseFloat(val.replace(/\./g, '').replace(',', '.'));
     }
-  ],
-  'cat-a': [ // Fonte: PRIMEIRA HABILITAÇÃO DE MOTO – CAT. A .pdf (Preços idênticos à Cat B)
-    {
-      name: "Básico",
-      priceCash: "300,00",
-      priceInstallment: "400,00",
-      installments: 2,
-      features: ["2 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    },
-    {
-      name: "Intermediário",
-      priceCash: "650,00",
-      priceInstallment: "800,00",
-      installments: 4,
-      features: ["5 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: true
-    },
-    {
-      name: "Complementar",
-      priceCash: "1.300,00",
-      priceInstallment: "1.500,00",
-      installments: 10,
-      features: ["10 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    }
-  ],
-  'cat-ab': [ // Fonte: PRIMEIRA HABILITAÇÃO DE MOTO E CARRO – CAT. AB (1).pdf
-    {
-      name: "Básico",
-      priceCash: "600,00",
-      priceInstallment: "800,00",
-      installments: 4,
-      features: ["4 Aulas Práticas", "Aluguel do 1º veículo GRÁTIS"],
-      highlight: false
-    },
-    {
-      name: "Intermediário",
-      priceCash: "1.300,00",
-      priceInstallment: "1.500,00",
-      installments: 10,
-      features: ["10 Aulas Práticas", "Aluguel do 1º veículo GRÁTIS"],
-      highlight: true
-    },
-    {
-      name: "Complementar",
-      priceCash: "1.799,00",
-      priceInstallment: "1.900,00",
-      installments: 10,
-      features: ["20 Aulas Práticas", "Aluguel do 1º veículo GRÁTIS"],
-      highlight: false
-    }
-  ],
-  'add-b': [ // Fonte: ADIÇÃO DE CATEGORIA CARRO – CAT. B (1).pdf
-    {
-      name: "Básico",
-      priceCash: "300,00",
-      priceInstallment: "400,00",
-      installments: 2,
-      features: ["2 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    },
-    {
-      name: "Intermediário",
-      priceCash: "650,00",
-      priceInstallment: "800,00",
-      installments: 4,
-      features: ["4 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: true
-    },
-    {
-      name: "Complementar",
-      priceCash: "1.300,00",
-      priceInstallment: "1.500,00",
-      installments: 10,
-      features: ["10 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    }
-  ],
-  'add-a': [ // Fonte: ADIÇÃO DE CATEGORIA MOTO – CAT. A.pdf
-    {
-      name: "Básico",
-      priceCash: "300,00",
-      priceInstallment: "400,00",
-      installments: 2,
-      features: ["2 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    },
-    {
-      name: "Intermediário",
-      priceCash: "650,00",
-      priceInstallment: "800,00",
-      installments: 4,
-      features: ["4 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: true
-    },
-    {
-      name: "Complementar",
-      priceCash: "1.300,00",
-      priceInstallment: "1.500,00",
-      installments: 10,
-      features: ["10 Aulas Práticas", "Aluguel do veículo GRÁTIS"],
-      highlight: false
-    }
-  ]
+    return parseFloat(val) || 0;
+  }
+  return 0;
+};
+
+const getPlanStyle = (name) => {
+  const planName = name?.toLowerCase() || '';
+  if (planName.includes('bronze')) return { color: '#CD7F32' }; 
+  if (planName.includes('prata')) return { color: '#C0C0C0' };
+  if (planName.includes('ouro')) return { color: '#FFD700' };
+  return { color: '#f20d0d' }; 
 };
 
 const PlanosSection = () => {
+  const [plans, setPlans] = useState('');
   const [activeTab, setActiveTab] = useState('cat-b');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const getParcela = (totalString, numParcelas) => {
-    const total = parseFloat(totalString.replace('.', '').replace(',', '.'));
-    const parcela = total / numParcelas;
-    return parcela.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  useEffect(() => {
+    const CACHE_KEY = 'precos_autoescola';
+    const CACHE_TIME = 10 * 60 * 60; 
+    const API_URL = import.meta.env.VITE_API_LINK; 
+
+    const fetchPrecos = async () => {
+      setIsLoading(true);
+      let dadosParaExibir = null;
+      const cachedRaw = localStorage.getItem(CACHE_KEY);
+      
+      if (cachedRaw) {
+        const { data, timestamp } = JSON.parse(cachedRaw);
+        const isCacheValido = (Date.now() - timestamp) < CACHE_TIME;
+
+        if (isCacheValido) {
+          setPlans(processarDadosDaPlanilha(data));
+          setIsLoading(false);
+          return;
+        }
+        dadosParaExibir = data; 
+      }
+
+      try {
+        if (!API_URL) return; 
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('Erro na resposta da API');
+        
+        const data = await response.json();
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ data: data, timestamp: Date.now() }));
+        setPlans(processarDadosDaPlanilha(data));
+
+      } catch (error) {
+        console.error("Erro ao buscar API...", error);
+        if (dadosParaExibir) {
+          setPlans(processarDadosDaPlanilha(dadosParaExibir));
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchPrecos();
+  }, []);
+
+  const formatCurrency = (val) => {
+    const numberVal = parseValue(val);
+    return numberVal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   };
 
   const handlePlanClick = (planName) => {
@@ -160,11 +107,12 @@ const PlanosSection = () => {
     window.open(link, '_blank');
   };
 
+  const currentPlans = plans[activeTab] || [];
+
   return (
-    <section className="w-full py-20 px-4 md:px-10 lg:px-40 bg-[#f8f5f5] text-[#181111]" id="planos">
-      <div className="max-w-[1200px] mx-auto flex flex-col gap-12">
+    <section className="w-full py-20 px-4 md:px-10 lg:px-20 bg-[#f8f5f5] text-[#181111]" id="planos">
+      <div className="max-w-[1400px] mx-auto flex flex-col gap-12">
         
-        {/* Cabeçalho */}
         <div className="flex flex-col items-center text-center gap-4">
           <span className="text-[#f20d0d] font-bold text-sm uppercase tracking-wider bg-[#f20d0d]/10 px-4 py-2 rounded-full">
             Investimento
@@ -177,7 +125,6 @@ const PlanosSection = () => {
           </p>
         </div>
 
-        {/* Navegação de Abas */}
         <div className="flex flex-wrap justify-center gap-3 mb-6">
           {categories.map((cat) => (
             <button
@@ -195,84 +142,106 @@ const PlanosSection = () => {
           ))}
         </div>
 
-        {/* Grid de Planos */}
-        <AnimatePresence mode='wait'>
-          <motion.div 
-            key={activeTab}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          >
-            {plansData[activeTab].map((plan, index) => (
-              <div 
-                key={index} 
-                className={`relative flex flex-col bg-white rounded-3xl p-8 border transition-all duration-300 group ${
-                  plan.highlight 
-                    ? 'border-[#f20d0d] shadow-2xl shadow-[#f20d0d]/10 md:-mt-4 md:mb-4 z-10' 
-                    : 'border-gray-100 shadow-lg hover:border-[#f20d0d]/30'
-                }`}
+        <div className="min-h-[400px]">
+          {isLoading ? (
+            <div className="flex flex-col items-center justify-center h-full pt-10">
+              <Loader2 className="w-12 h-12 text-[#f20d0d] animate-spin mb-4" />
+              <p className="text-[#634f4f] font-medium animate-pulse">Buscando as melhores ofertas...</p>
+            </div>
+          ) : (
+            <AnimatePresence mode='wait'>
+              <motion.div 
+                key={activeTab}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 md:gap-8 pt-12" // pt-12 adicionado para dar espaço pro card que "pula"
               >
-                {plan.highlight && (
-                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#f20d0d] text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1 shadow-md whitespace-nowrap">
-                    <Star size={12} fill="white" /> Recomendado
-                  </div>
-                )}
+                {currentPlans.map((plan, index) => (
+                  <div 
+                    key={index} 
+                    /* MÁGICA DO DESTAQUE: Borda muito mais grossa (border-4), sombra vermelha forte e sobe bastante (-translate-y-6) */
+                    className={`relative flex flex-col bg-white rounded-3xl p-6 transition-all duration-300 group ${
+                      plan.highlight 
+                        ? 'border-4 border-[#f20d0d] shadow-[0_20px_50px_rgba(242,13,13,0.25)] transform md:-translate-y-6 z-10' 
+                        : 'border border-gray-200 shadow-md hover:border-[#f20d0d]/40 mt-2 hover:-translate-y-1'
+                    }`}
+                  >
+                    
+                    {/* Medalha vazando, AGORA EXCETO NO COBRE */}
+                    {plan.name.toLowerCase() !== 'cobre' && (
+                      <div className="absolute -top-8 -right-4 md:-right-6 z-20 transform rotate-12 drop-shadow-xl transition-transform duration-300 hover:scale-110 hover:rotate-6">
+                        <GiRibbonMedal 
+                          size={76} 
+                          color={getPlanStyle(plan.name).color} 
+                          className="drop-shadow-[0_4px_4px_rgba(0,0,0,0.3)]"
+                        />
+                      </div>
+                    )}
 
-                <div className="mb-6 text-center">
-                  <h3 className="text-xl font-bold text-[#181111] mb-4">{plan.name}</h3>
-                  
-                  {/* Preço à vista */}
-                  <div className="flex flex-col items-center justify-center bg-[#f8f5f5] rounded-xl p-4 mb-4">
-                    <span className="text-xs text-[#634f4f] uppercase font-bold mb-1">À Vista</span>
-                    <div className="flex items-baseline gap-1 text-[#181111]">
-                      <span className="text-sm font-medium">R$</span>
-                      <span className="text-4xl font-black tracking-tight">{plan.priceCash}</span>
+                    {/* Tag de "MAIS POPULAR" chamativa e pulsando */}
+                    {plan.highlight && (
+                      <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-[#f20d0d] text-white px-6 py-2 rounded-full text-sm font-black uppercase tracking-widest flex items-center gap-2 shadow-xl whitespace-nowrap z-30 animate-bounce">
+                        <Star size={16} fill="white" className="animate-pulse" /> MAIS POPULAR
+                      </div>
+                    )}
+
+                    <div className="mb-6 text-center mt-6">
+                      <h3 className="text-2xl font-black text-[#181111] mb-4 uppercase tracking-wide">
+                        {plan.name}
+                      </h3>
+                      
+                      <div className="flex flex-col items-center justify-center bg-[#f8f5f5] rounded-xl p-4 mb-4">
+                        <span className="text-xs text-[#634f4f] uppercase font-bold mb-1">À Vista</span>
+                        <div className="flex items-baseline gap-1 text-[#181111]">
+                          <span className="text-sm font-medium">R$</span>
+                          <span className="text-4xl font-black tracking-tight">{formatCurrency(plan.priceCash)}</span>
+                        </div>
+                      </div>
+
+                      <div className="text-sm text-[#634f4f] min-h-[40px] flex items-center justify-center flex-col">
+                        <span className="font-bold text-[#f20d0d] whitespace-pre-line text-center">
+                          {plan.installments || `ou R$ ${plan.priceInstallment} parcelado`}
+                        </span>
+                        <span className="text-xs font-bold uppercase mt-1">No Cartão</span>
+                      </div>
                     </div>
+
+                    <div className="flex-1">
+                      <div className="h-px w-full bg-gray-100 mb-6"></div>
+                      <ul className="flex flex-col gap-4 mb-8">
+                        {plan.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-sm text-[#181111]/80 font-medium">
+                            <CheckCircle2 className="text-[#f20d0d] shrink-0" size={18} />
+                            {feature}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <button 
+                      onClick={() => handlePlanClick(plan.name)}
+                      className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
+                      plan.highlight
+                        ? 'bg-[#f20d0d] text-white hover:bg-red-700 shadow-lg shadow-[#f20d0d]/30 hover:shadow-xl hover:scale-105'
+                        : 'bg-[#181111] text-white hover:bg-gray-900 hover:scale-[1.02]'
+                    }`}>
+                      Quero este plano
+                      <MousePointerClick size={18} />
+                    </button>
                   </div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </div>
 
-                  {/* Preço Parcelado */}
-                  <div className="text-sm text-[#634f4f]">
-                    ou <span className="font-bold text-[#181111]">{plan.installments}x</span> de <span className="font-bold text-[#f20d0d] text-lg">R$ {getParcela(plan.priceInstallment, plan.installments)}</span>
-                    <div className="text-xs opacity-70 mt-1">(Total a prazo: R$ {plan.priceInstallment})</div>
-                  </div>
-                </div>
-
-                {/* Lista de Benefícios */}
-                <div className="flex-1">
-                  <div className="h-px w-full bg-gray-100 mb-6"></div>
-                  <ul className="flex flex-col gap-4 mb-8">
-                    {plan.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-[#181111]/80">
-                        <CheckCircle2 className="text-[#f20d0d] shrink-0" size={18} />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <button 
-                  onClick={() => handlePlanClick(plan.name)}
-                  className={`w-full py-4 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 ${
-                  plan.highlight
-                    ? 'bg-[#f20d0d] text-white hover:bg-red-700 shadow-lg shadow-[#f20d0d]/25 hover:shadow-xl hover:scale-[1.02]'
-                    : 'bg-[#181111] text-white hover:bg-gray-900 hover:scale-[1.02]'
-                }`}>
-                  Quero este plano
-                  <MousePointerClick size={18} />
-                </button>
-              </div>
-            ))}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Nota de Rodapé da Seção */}
         <div className="text-center space-y-2 mt-4">
-          <p className="text-xs text-[#8a6060] max-w-3xl mx-auto">
+          <p className="text-xs text-[#8a6060] max-w-3xl mx-auto font-medium">
             * Taxas estaduais (DUDA) e exames da clínica não estão inclusos.
             <br />
-            ** No plano AB, apenas o primeiro veículo tem aluguel grátis para o exame.
+            ** Consulte condições de parcelamento. No plano AB, apenas o primeiro veículo tem aluguel grátis para o exame.
           </p>
         </div>
 
