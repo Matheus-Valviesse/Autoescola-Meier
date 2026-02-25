@@ -125,7 +125,7 @@ const GoogleReviews = () => {
           className="mt-16 text-center"
         >
           <a 
-            href="https://www.google.com/search?sca_esv=75292d05ed8192ec&sxsrf=ANbL-n5vPwQifIOmbfVcsMyQmOnZkrBa6g:1769795454161&si=AL3DRZHrmvnFAVQPOO2Bzhf8AX9KZZ6raUI_dT7DG_z0kV2_x1ktskuxNJ2O-CbyJ5KGsSCotzlHFPhGKZkK1fKMLKmau0Hsmh2McuSdvz44Mx7OMxj9VcbLSvVZeUdmrs1tLL1FdoN8Ij23H7KZX4Mhfa-8LzKejw%3D%3D&q=Auto+Escola+M%C3%A9ier+Cr%C3%ADticas&sa=X&ved=2ahUKEwjd9vrq6bOSAxV4rpUCHfsQOm4Q0bkNegQINhAF&biw=1920&bih=911&dpr=1&aic=0" // Coloque o link real do Google Maps da autoescola aqui
+            href="https://www.google.com/search?sca_esv=75292d05ed8192ec&sxsrf=ANbL-n5vPwQifIOmbfVcsMyQmOnZkrBa6g:1769795454161&si=AL3DRZHrmvnFAVQPOO2Bzhf8AX9KZZ6raUI_dT7DG_z0kV2_x1ktskuxNJ2O-CbyJ5KGsSCotzlHFPhGKZkK1fKMLKmau0Hsmh2McuSdvz44Mx7OMxj9VcbLSvVZeUdmrs1tLL1FdoN8Ij23H7KZX4Mhfa-8LzKejw%3D%3D&q=Auto+Escola+M%C3%A9ier+Cr%C3%ADticas&sa=X&ved=2ahUKEwjd9vrq6bOSAxV4rpUCHfsQOm4Q0bkNegQINhAF&biw=1920&bih=911&dpr=1&aic=0"
             target="_blank" 
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white border border-[#e6dbdb] rounded-full text-[#181111] font-bold hover:bg-[#f8f5f5] hover:border-[#f20d0d] transition-all group shadow-sm"
