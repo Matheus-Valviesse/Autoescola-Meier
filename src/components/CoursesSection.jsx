@@ -53,7 +53,7 @@ const PlanosSection = () => {
 
   useEffect(() => {
     const CACHE_KEY = 'precos_autoescola';
-    const CACHE_TIME = 10 * 60 * 60; 
+    const CACHE_TIME = 10 * 60 * 6000; 
     const API_URL = import.meta.env.VITE_API_LINK; 
 
     const fetchPrecos = async () => {
@@ -64,7 +64,7 @@ const PlanosSection = () => {
       if (cachedRaw) {
         const { data, timestamp } = JSON.parse(cachedRaw);
         const isCacheValido = (Date.now() - timestamp) < CACHE_TIME;
-
+        console.log(CACHE_TIME)
         if (isCacheValido) {
           setPlans(processarDadosDaPlanilha(data));
           setIsLoading(false);
