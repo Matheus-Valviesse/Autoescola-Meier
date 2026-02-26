@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React,{useState, useEffect} from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   CheckCircle, 
   ArrowRight, 
@@ -7,11 +7,12 @@ import {
   MapPin, 
   Store, 
   Clock, 
-  Navigation 
+  Navigation,
+  ChevronLeft, 
+  ChevronRight 
 } from 'lucide-react';
 
 const Hero = () => {
-  // Configuração das animações
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: { 
@@ -30,6 +31,21 @@ const Hero = () => {
       }
     }
   };
+
+
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = ['imgs/img_1.png', '/imgs/img_2.png', '/imgs/img_3.png', '/imgs/img_4.png'];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 10000); 
+
+    return () => clearInterval(timer);
+  }, [images.length]);
+
+  const nextImage = () => setCurrentImage((prev) => (prev + 1) % images.length);
+  const prevImage = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
 
   return (
     <div className="relative flex min-h-screen w-full flex-col overflow-x-hidden bg-[#f8f5f5] text-[#181111] font-sans">
@@ -109,12 +125,49 @@ const Hero = () => {
               >
                 <div className="absolute -right-10 -top-10 h-[80%] w-[80%] rounded-xl bg-[#f20d0d]/5 -z-10"></div>
                 <div className="relative w-full overflow-hidden rounded-xl shadow-2xl aspect-[4/5] md:aspect-square lg:aspect-[4/5]">
-                  {/* Substitua a URL abaixo pela sua imagem real */}
-                  <img 
-                    src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=1000&auto=format&fit=crop" 
-                    alt="Aluno feliz na auto escola" 
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  
+{/* --- INÍCIO DO CARROSSEL --- */}
+                  <div className="absolute inset-0 group">
+                    <AnimatePresence mode="wait">
+                      <motion.img 
+                        key={currentImage}
+                        src={images[currentImage]} 
+                        alt={`Imagem ${currentImage + 1} da Mr. Rocha Auto Escola`}
+                        className="absolute inset-0 h-full w-full object-cover"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8 }}
+                      />
+                    </AnimatePresence>
+
+                    {/* Botões de Navegação (Aparecem no hover) */}
+                    <button 
+                      onClick={prevImage}
+                      className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 text-[#181111] opacity-0 backdrop-blur-sm transition-opacity hover:bg-white group-hover:opacity-100"
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button 
+                      onClick={nextImage}
+                      className="absolute right-4 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/80 p-2 text-[#181111] opacity-0 backdrop-blur-sm transition-opacity hover:bg-white group-hover:opacity-100"
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+
+                    {/* Indicadores (Bolinhas) */}
+                    <div className="absolute bottom-32 left-0 right-0 z-10 flex justify-center gap-2">
+                      {images.map((_, idx) => (
+                        <div 
+                          key={idx} 
+                          className={`h-1.5 rounded-full transition-all duration-300 ${
+                            idx === currentImage ? 'w-6 bg-[#f20d0d]' : 'w-2 bg-white/60'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {/* --- FIM DO CARROSSEL --- */}
                   
                   {/* Card Flutuante sobre a imagem */}
                   <motion.div 
